@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+export base_dir="${PWD}"
+export target="${HOME}"
+
+
+function linkit {
+
+    # Create Sym links for config files
+    ln -s $1 $2
+}
+
+function configure_vim {
+
+    linkit "${base_dir}/vim/vimrc" "${HOME}/.vimrc"
+    git clone git://github.com/gmarik/Vundle.git $target/.vim/bundle/Vundle.vim
+
+
+    vim +silent! +BundleInstall! +qall #2&> /dev/null
+
+
+    bash $target/.vim/bundle/YouCompleteMe/install.sh
+
+}
+
+function configure_i3 {
+
+    # Populate i3 config files
+    mkdir -p "${HOME}/.config/i3" "${HOME}/.config/i3status"
+    linkit "${base_dir}/i3/i3_config" "${HOME}/.config/i3/config"
+    linkit "${base_dir}/i3/i3status_config" "${HOME}/.config/i3status/config"
+
+}
+
+function configure_zsh {
+
+    linkit "${base_dir}/zsh/zshrc" "${HOME}/.zshrc"
+    linkit "${base_dir}/zsh/aliases.zsh" "${HOME}/.aliases.zsh"
+    linkit "${base_dir}/zsh/keys.zsh" "${HOME}/.keys.zsh"
+    linkit "${base_dir}/zsh/plugins.zsh" "${HOME}/.plugins.zsh"
+    linkit "${base_dir}/zsh/env.zsh" "${HOME}/.env.zsh"
+    # I like antigen these days!
+    git clone https://github.com/zsh-users/antigen.git ${HOME}/.antigen
+
+
+}
+
+function configure_git {
+
+    linkit "${base_dir}/git/gitconfig" "${HOME}/.gitconfig"
+    linkit "${base_dir}/git/gitignoreglobal" "${HOME}/.gitignoreglobal"
+
+}
+
+function configure_irc {
+
+    mkdir -p "${HOME}/.config/hexchat" "${HOME}/.config/irssi/"
+    cp -arf ${base_dir}/irc/hexchat/* ${HOME}/.config/hexchat/
+    cp -arf ${base_dir}/irc/irssi/* ${HOME}/.config/irssi/
+}
+
+function configure_repos {
+    exit 0
+}
+
+function configure_python {
+    exit 0
+}
+
+configure_vim
+configure_i3
+configure_zsh
+configure_git
+configure_irc
+#configure_repos
+#configure_python

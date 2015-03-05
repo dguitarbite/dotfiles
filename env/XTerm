@@ -1,0 +1,47 @@
+! Use a nice truetype font and size by default ...
+xterm*faceName: Deja Vu:size=10:antialias=false
+xterm*font: 7x13
+
+! Every shell is a login shell by default (for inclusion of all necessary environment variables)
+xterm*loginshell: true
+
+! I like a LOT of scrollback...
+xterm*savelines: 16384
+
+! double-click to select whole URLs :D
+xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+
+! DOS-box colours...
+xterm*foreground: #a8a8a8
+xterm*background: #1c1c1c
+xterm*color0: #000000
+xterm*color1: #a80000
+xterm*color2: #00a800
+xterm*color3: #a85400
+xterm*color4: #0000a8
+xterm*color5: #a800a8
+xterm*color6: #00a8a8
+xterm*color7: #a8a8a8
+xterm*color8: #545454
+xterm*color9: #fc5454
+xterm*color10: #54fc54
+xterm*color11: #fcfc54
+xterm*color12: #5454fc
+xterm*color13: #fc54fc
+xterm*color14: #54fcfc
+xterm*color15: #fcfcfc
+
+! right hand side scrollbar...
+xterm*rightScrollBar: true
+xterm*ScrollBar: true
+
+! stop output to terminal from jumping down to bottom of scroll again
+xterm*scrollTtyOutput: false
+
+! Adds unicode support
+XTerm*locale: true
+XTerm*utf8: 1
+
+! Clipboard
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)

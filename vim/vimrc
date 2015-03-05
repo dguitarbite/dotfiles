@@ -1,0 +1,290 @@
+" My .vimrc -- dguitarbite (dguitarbite@gmail.com)
+" github.com/dguitarbite/dguitarbite
+" Note to myself:
+" Use vim or die
+"
+
+" Vundle
+
+    " Pre-Configuration
+        set nocompatible              " Switch off vi backwards compatability
+        filetype off                  " I wanna use Vundle
+
+    " set the runtime path to include Vundle and initialize
+        set rtp+=$HOME/.vim/bundle/Vundle.vim
+
+    " Install Vim Plugins
+        call vundle#begin()         " Start Vundle Plugin Configuration
+            Plugin 'gmarik/Vundle.vim'
+            Plugin 'Valloric/YouCompleteMe'
+            Plugin 'tpope/vim-fugitive'
+            Plugin 'xolox/vim-easytags'
+            Plugin 'jmcantrell/vim-virtualenv'
+            Plugin 'chrisbra/NrrwRgn'
+            Plugin 'scrooloose/syntastic'
+            Plugin 'tomtom/tlib_vim'
+            Plugin 'Shougo/neocomplete'
+            Plugin 'bling/vim-airline'
+            Plugin 'kien/ctrlp.vim'
+            Plugin 'klen/python-mode'
+            Plugin 'TimeTap'
+            Plugin 'StripWhiteSpaces'
+            Plugin 'pyunit.vim'
+            Plugin 'reinh/vim-makegreen'
+            Plugin 'tpope/vim-rails'
+            Plugin 'vim-ruby/vim-ruby'
+            Plugin 'tpope/vim-cucumber'
+            Plugin 'closetag.vim'
+            Plugin 'Gundo'
+            Plugin 'tagbar'
+            Plugin 'scratch'
+            Plugin 'pyflakes'
+            Plugin 'vim-misc'
+            Plugin 'rking/ag.vim'
+            Plugin 'mileszs/ack.vim'
+            Plugin 'shougo/unite.vim'
+            Plugin 'jisaacks/GitGutter'
+            Plugin 'scrooloose/nerdtree'
+            Plugin 'myusuf3/numbers.vim'
+            Plugin 'nvie/vim-togglemouse'
+            Plugin 'davidhalter/jedi-vim'
+            Plugin 'scrooloose/nerdcommenter'
+            Plugin 'ggreer/the_silver_searcher'
+            Plugin 'Shougo/neocomplcache.vim'
+            Plugin 'easymotion/vim-easymotion'
+            Plugin 'terryma/vim-multiple-cursors'
+            Plugin 'altercation/vim-colors-solarized'
+        call vundle#end()            " End Vundle Plugin Configuration
+
+    " Post-Configuration
+        filetype plugin indent on
+
+" General Configuration
+
+    " Background
+    set background=dark
+
+    " Color Scheme!
+        syntax enable
+	    try
+            colorscheme solarized
+        catch
+            colorscheme default
+        endtry
+
+    " Autoreload .vimrc
+        autocmd! bufwritepost .vimrc source %
+
+    " detect encoding
+        set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
+
+    " Tagbar toggle
+        nmap <F8> :TagbarToggle<CR>
+
+    " Misc
+        set laststatus=2
+        set showtabline=2
+        set showmatch
+        set backspace=indent,eol,start
+        set noshowmode
+        set encoding=utf-8
+        set fillchars+=stl:\ ,stlnc:\
+        set spell
+        set cursorline
+        map <F2> :NERDTreeToggle<CR>
+
+    " Undo My Life
+        set history=1000
+        set undolevels=700
+
+    " Disable backup and swap files
+        set nobackup
+        set nowritebackup
+        set noswapfile
+
+    " Formatting
+        set nowrap              " Do not wrap long lines
+        set autoindent          " Indent at the same level as previous line
+        set expandtab           " Tabs are spaces not tabs
+        set tabstop=4           " Indent every four columns
+        set softtabstop=4       " Backspace deletes tabs
+        set shiftwidth=4        " Use indents of 4 spaces
+        set splitright          " Vsplit to right
+        set splitbelow          " split to below
+        set pastetoggle=<F5>    " Toggle paste mode
+
+    " Searching ...
+        set incsearch
+        set hlsearch
+        set ignorecase
+        set smartcase
+        set gdefault
+        set incsearch
+        set showmatch
+        set hlsearch
+
+    " Disable arrow keys!
+        nnoremap <up> <nop>
+        nnoremap <down> <nop>
+        nnoremap <left> <nop>
+        nnoremap <right> <nop>
+        inoremap <up> <nop>
+        inoremap <down> <nop>
+        inoremap <left> <nop>
+        inoremap <right> <nop>
+        nnoremap j gj
+        nnoremap k gk
+
+    " Settings for ctrlp
+        let g:ctrlp_max_height = 30
+        set wildignore+=*.pyc
+        set wildignore+=*_build/*
+        set wildignore+=*/coverage/*
+
+    " Enable and Disable Mouse
+        set mouse=a     " Automatically Enable mouse usage
+        set mousehide   " Hide the mouse cursor while typing
+
+    " Status Line
+        set statusline+=%n:             " - buffer number, followed by a colon
+        set statusline+=%<%f            " - relative filename, truncated from the left
+        set statusline+=\               " - a space
+        set statusline+=%w
+        set statusline+=%h              " - [Help] if this is a help buffer
+        set statusline+=%m              " - [+] if modified, [-] if not modifiable
+        set statusline+=%r              " - [RO] if readonly
+        set statusline+=\               " - a space
+        set statusline+=%{fugitive#statusline()} " Add Vim Fugutive in the status line
+        set statusline+=\               " - a space
+        set statusline+=%=              " - right-align the rest
+        set statusline+=%-10.(%l,%c%V%) " - line,column[-virtual column]
+        set statusline+=\               " - a space
+        set statusline+=%4L             " - total number of lines in buffer
+        set statusline+=\               " - a space
+        set statusline+=%P              " - position in buffer as percentage
+
+    " Remapping Keys
+        " The leader key!
+            let mapleader=','
+
+        " Easy movement
+            map <C-J> <C-W>j<C-W>_
+            map <C-K> <C-W>k<C-W>_
+            map <C-L> <C-W>l<C-W>_
+            map <C-H> <C-W>h<C-W>_
+
+        " Misc
+            map Y y$
+            nnoremap B ^ " Move to begining of a line
+            nnoremap E $ " Move to end of a line
+
+        " Quick quit command
+            noremap <Leader>e :quit<CR>  " Quit current window
+            noremap <Leader>E :qa!<CR>   " Quit all windows
+
+
+        " Code folding options
+            nmap <leader>f0 :set foldlevel=0<CR>
+            nmap <leader>f1 :set foldlevel=1<CR>
+            nmap <leader>f2 :set foldlevel=2<CR>
+            nmap <leader>f3 :set foldlevel=3<CR>
+            nmap <leader>f4 :set foldlevel=4<CR>
+            nmap <leader>f5 :set foldlevel=5<CR>
+            nmap <leader>f6 :set foldlevel=6<CR>
+            nmap <leader>f7 :set foldlevel=7<CR>
+            nmap <leader>f8 :set foldlevel=8<CR>
+            nmap <leader>f9 :set foldlevel=9<CR>
+            nnoremap <space> za " Space to open/close folds
+
+        " Find merge conflict markers
+            map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+
+        " Visual shifting (does not exit Visual mode)
+            vnoremap < <gv
+            vnoremap > >gv
+
+        " Write in SUDO mode
+            cmap w!! w !sudo tee % >/dev/null
+
+
+
+    " Airline Customization
+        let g:airline_theme='wombat' " Set theme
+        let g:airline#extensions#tabline#enabled = 1	" Enable for tabview
+        let g:airline#extensions#tabline#left_sep = ' '
+        let g:airline#extensions#tabline#left_alt_sep = ''
+
+
+    " Number Magik
+    " Ignore some numbers
+        let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree']
+
+    " Set number mode keymapbindings
+        set number
+        nnoremap <F3> :NumbersToggle<CR>
+        nnoremap <F4> :set nu!<CR>
+
+    " Gundo toggle
+    nnoremap <F6> :GundoToggle<CR>
+
+    " Ctags
+
+        set tags=./tags;/,~/.vimtags
+
+        " Make tags placed in .git/tags file available in all levels of a repository
+        let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+        if gitroot != ''
+            let &tags = &tags . ',' . gitroot . '/.git/tags'
+        endif
+
+    " Fugitive
+
+        nnoremap <silent> <leader>gs :Gstatus<CR>
+        nnoremap <silent> <leader>gd :Gdiff<CR>
+        nnoremap <silent> <leader>gc :Gcommit<CR>
+        nnoremap <silent> <leader>gb :Gblame<CR>
+        nnoremap <silent> <leader>gl :Glog<CR>
+        nnoremap <silent> <leader>gp :Git push<CR>
+        nnoremap <silent> <leader>gr :Gread<CR>
+        nnoremap <silent> <leader>gw :Gwrite<CR>
+        nnoremap <silent> <leader>ge :Gedit<CR>
+        nnoremap <silent> <leader>gi :Git add -p %<CR>
+        nnoremap <silent> <leader>gg :SignifyToggle<CR>
+
+
+" Add programming language support
+
+    " Python
+        " Python Mode
+            let g:pymode_rope = 1
+
+        " Python folding
+            set foldmethod=indent
+
+        " Documentation
+            let g:pymode_doc = 1
+            let g:pymode_doc_key = 'K'
+
+        " Linting
+            let g:pymode_lint = 1
+            let g:pymode_lint_checker = "pyflakes,pep8"
+            let g:pymode_lint_write = 1 " Auto check on save
+
+        " Support virtualenv
+            let g:pymode_virtualenv = 1
+
+        " Enable breakpoints plugin
+            let g:pymode_breakpoint = 1
+            let g:pymode_breakpoint_bind = '<leader>b'
+
+        " syntax highlighting
+            let g:pymode_syntax = 1
+            let g:pymode_syntax_all = 1
+            let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+            let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+        " Don't autofold code
+            let g:pymode_folding = 0
+
+       " Better autocompletion for python
+           let g:pymode_rope = 0

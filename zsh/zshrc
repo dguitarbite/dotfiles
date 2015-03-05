@@ -1,0 +1,16 @@
+# History
+HIST_STAMPS="mm/dd/yyyy"
+HISTSIZE=10000
+SAVEHIST=8500
+
+# Autoupdate
+export UPDATE_ZSH_DAYS=5
+
+# Antigen to manage zsh stuff
+source ${HOME}/.antigen/antigen.zsh
+source .aliases.zsh
+source .env.zsh
+source .keys.zsh
+source .plugins.zsh
+
+setopt nocorrectall

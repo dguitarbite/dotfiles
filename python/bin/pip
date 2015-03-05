@@ -1,0 +1,8 @@
+#!/bin/bash
+script=$(readlink -f -- "$1")
+case "$script" in ($HOME/*)
+    exec pip2.7 "$@"
+    ;;
+esac
+
+exec pip "$@"
