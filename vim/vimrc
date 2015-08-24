@@ -38,7 +38,7 @@
             Plugin 'Gundo'
             Plugin 'tagbar'
             Plugin 'scratch'
-            Plugin 'pyflakes'
+            Plugin 'vim-flake8'
             Plugin 'vim-misc'
             Plugin 'rking/ag.vim'
             Plugin 'mileszs/ack.vim'
@@ -54,9 +54,21 @@
             Plugin 'easymotion/vim-easymotion'
             Plugin 'terryma/vim-multiple-cursors'
             Plugin 'altercation/vim-colors-solarized'
+            Plugin 'Rykka/riv.vim'
+            Plugin 'c.vim'
+            Plugin 'awk-support.vim'
+            Plugin 'bash-support.vim'
+            Plugin 'LucHermitte/lh-cpp'
+            Plugin 'fholgado/minibufexpl.vim'
+            Plugin 'fs111/pydoc.vim'
+            Plugin 'airblade/vim-gitgutter.git'
+            Plugin 'vim-scripts/TaskList.vim'
+            Plugin 'MarcWeber/vim-addon-mw-utils'
+            Plugin 'vadv/vim-chef'
         call vundle#end()            " End Vundle Plugin Configuration
 
     " Post-Configuration
+        filetype on
         filetype plugin indent on
 
 " General Configuration
@@ -78,8 +90,12 @@
     " detect encoding
         set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 
+
     " Tagbar toggle
         nmap <F8> :TagbarToggle<CR>
+
+    " Task Lists
+        nmap <F9> :TaskList<CR>
 
     " Misc
         set laststatus=2
@@ -91,7 +107,7 @@
         set fillchars+=stl:\ ,stlnc:\
         set spell
         set cursorline
-        map <F2> :NERDTreeToggle<CR>
+        set foldlevel=4     " Set folding level to 4
 
     " Undo My Life
         set history=1000
@@ -108,7 +124,7 @@
         set expandtab           " Tabs are spaces not tabs
         set tabstop=4           " Indent every four columns
         set softtabstop=4       " Backspace deletes tabs
-        set shiftwidth=4        " Use indents of 4 spaces
+        set shiftwidth=4        " Shift by 4 spaces '>>/<<'
         set splitright          " Vsplit to right
         set splitbelow          " split to below
         set pastetoggle=<F5>    " Toggle paste mode
@@ -163,6 +179,14 @@
         set statusline+=\               " - a space
         set statusline+=%P              " - position in buffer as percentage
 
+    " Git gutter
+        let g:gitgutter_realtime = 0    " Disable realtime checks to reduce
+        let g:gitgutter_eager = 0
+        let g:gitgutter_escape_grep = 1
+        let g:gitgutter_enabled = 1
+        let g:gitgutter_signs = 1
+        let g:gitgutter_highlight_lines = 1
+
     " Remapping Keys
         " The leader key!
             let mapleader=','
@@ -173,15 +197,24 @@
             map <C-L> <C-W>l<C-W>_
             map <C-H> <C-W>h<C-W>_
 
+        " Split Windows
+            noremap <leader>b <C-w>v<CR>
+            noremap <leader>v <C-w>s<CR>
+
+        " Gitgutter toggle
+            noremap <leader>gg :GitGutterToggle<CR>
+            noremap <leader>GG :GitGutterLineHighlightsToggle<CR>
+
         " Misc
             map Y y$
             nnoremap B ^ " Move to begining of a line
             nnoremap E $ " Move to end of a line
+            map <F2> :NERDTreeToggle<CR>
 
-        " Quick quit command
+        " Quit, Save ... command
             noremap <Leader>e :quit<CR>  " Quit current window
             noremap <Leader>E :qa!<CR>   " Quit all windows
-
+            noremap <Leader>w :w<CR>     " Quick Save
 
         " Code folding options
             nmap <leader>f0 :set foldlevel=0<CR>
@@ -225,7 +258,7 @@
         nnoremap <F4> :set nu!<CR>
 
     " Gundo toggle
-    nnoremap <F6> :GundoToggle<CR>
+        nnoremap <F6> :GundoToggle<CR>
 
     " Ctags
 
@@ -249,7 +282,6 @@
         nnoremap <silent> <leader>gw :Gwrite<CR>
         nnoremap <silent> <leader>ge :Gedit<CR>
         nnoremap <silent> <leader>gi :Git add -p %<CR>
-        nnoremap <silent> <leader>gg :SignifyToggle<CR>
 
 
 " Add programming language support
@@ -263,12 +295,16 @@
 
         " Documentation
             let g:pymode_doc = 1
-            let g:pymode_doc_key = 'K'
+            let g:pymode_doc_key = 1
 
         " Linting
             let g:pymode_lint = 1
             let g:pymode_lint_checker = "pyflakes,pep8"
             let g:pymode_lint_write = 1 " Auto check on save
+            let g:pyflakes_use_quickfix = 0
+            let g:flake8_show_in_gutter = 1
+            let g:flake8_show_in_file = 1
+            autocmd BufWritePost *.py call Flake8() " Call flake8 on save.
 
         " Support virtualenv
             let g:pymode_virtualenv = 1
@@ -286,5 +322,14 @@
         " Don't autofold code
             let g:pymode_folding = 0
 
-       " Better autocompletion for python
-           let g:pymode_rope = 0
+        " Better autocompletion for python
+            let g:pymode_rope = 0
+
+    " C, C++
+        " Enable cmake, doxygen in c.vim
+            let g:C_UseTool_cmake = 'yes'
+            let g:C_UseTool_doxygen = 'yes'
+
+    " Ruby, Chef, Vim-Chef
+        " Enable syntax for chef files
+        autocmd FileType ruby,eruby set filetype=ruby.eruby.chef

@@ -16,6 +16,9 @@ alias gpull='git pull'
 alias gcheckout='git checkout'
 alias gcheckoutb='git checkout -b'
 
+alias eosc='osc -A https://api.opensuse.org'
+alias iosc='osc -A https://api.suse.de'
+
 # Various Repos Paths
 alias dCompute=$HOME/Repositories/Dev/OpenStack/Compute
 alias rCompute=$HOME/Repositories/Rev/OpenStack/Compute

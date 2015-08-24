@@ -67,10 +67,16 @@ function configure_python {
     exit 0
 }
 
+function configure_env {
+
+    cp -arf ${base_dir}/env/oscrc ${HOME}/.oscrc
+}
+
 configure_vim
 configure_i3
 configure_zsh
 configure_git
 configure_irc
+configure_env
 #configure_repos
 #configure_python
