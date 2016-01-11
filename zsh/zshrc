@@ -14,3 +14,5 @@ source .keys.zsh
 source .plugins.zsh
 
 setopt nocorrectall
+
+

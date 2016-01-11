@@ -8,3 +8,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
     export EDITOR='nano'
 fi
+
+
+source #{HOME}/deep_learning/distro/install/bin/torch-activate

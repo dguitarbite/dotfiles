@@ -22,6 +22,9 @@ bindsym $mod+x kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 
+# Start Polkit for authentication
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 # Network Manager Applet --
 exec --no-startup-id nm-applet
 
