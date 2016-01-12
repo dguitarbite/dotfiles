@@ -9,5 +9,4 @@ else
     export EDITOR='nano'
 fi
 
-
-source #{HOME}/deep_learning/distro/install/bin/torch-activate
+#source #{HOME}/deep_learning/distro/install/bin/torch-activate
