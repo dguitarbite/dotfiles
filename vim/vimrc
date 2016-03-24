@@ -15,8 +15,13 @@
 
     " Install Vim Plugins
         call vundle#begin()         " Start Vundle Plugin Configuration
+
+            " Reviewed
             Plugin 'gmarik/Vundle.vim'
+            Plugin 'vim-airline/vim-airline'
             Plugin 'Valloric/YouCompleteMe'
+
+            " To be reviewed.
             Plugin 'tpope/vim-fugitive'
             Plugin 'xolox/vim-easytags'
             Plugin 'jmcantrell/vim-virtualenv'
@@ -24,7 +29,6 @@
             Plugin 'scrooloose/syntastic'
             Plugin 'tomtom/tlib_vim'
             Plugin 'Shougo/neocomplete'
-            Plugin 'vim-airline/vim-airline'
             Plugin 'vim-airline/vim-airline-themes'
             Plugin 'kien/ctrlp.vim'
             Plugin 'klen/python-mode'
@@ -106,6 +110,7 @@
         nmap <F9> :TaskList<CR>
 
     " Misc
+        set timeoutlen=50
         set laststatus=2
         set showtabline=2
         set showmatch
@@ -253,7 +258,15 @@
 
 
     " Airline Customization
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#left_sep = ' '
+        let g:airline#extensions#tabline#left_alt_sep = '|'
+
         let g:airline_powerline_fonts = 1
+        if !exists('g:airline_symbols')
+            let g:airline_symbols = {}
+        endif
+
         let g:airline_theme='luna' " Set theme
         let g:airline#extensions#tabline#enabled = 1	" Enable for tabview
         let g:airline#extensions#tabline#left_sep = ' '

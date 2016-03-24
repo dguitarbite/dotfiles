@@ -1,36 +1,58 @@
 ! Use a nice truetype font and size by default ...
-xterm*faceName: Deja Vu:size=10:antialias=false
+xterm*faceName:DejaVu:style=Book:pixelsize=14:antialias=false
 xterm*font: 7x13
+XTerm*locale: true
+XTerm*UTF-8: 1
 
 ! Every shell is a login shell by default (for inclusion of all necessary environment variables)
 xterm*loginshell: true
 
 ! I like a LOT of scrollback...
-xterm*savelines: 16384
+xterm*savelines: 100000
 
 ! double-click to select whole URLs :D
 xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 
-! DOS-box colours...
-xterm*foreground: #a8a8a8
-xterm*background: #1c1c1c
-xterm*color0: #000000
-xterm*color1: #a80000
-xterm*color2: #00a800
-xterm*color3: #a85400
-xterm*color4: #0000a8
-xterm*color5: #a800a8
-xterm*color6: #00a8a8
-xterm*color7: #a8a8a8
-xterm*color8: #545454
-xterm*color9: #fc5454
-xterm*color10: #54fc54
-xterm*color11: #fcfc54
-xterm*color12: #5454fc
-xterm*color13: #fc54fc
-xterm*color14: #54fcfc
-xterm*color15: #fcfcfc
+! Solarized Dark theme colours...
+*background:            #002b36
+*foreground:            #839496
+*fadeColor:             #002b36
+*cursorColor:           #93a1a1
+*pointerColorBackground:#586e75
+*pointerColorForeground:#93a1a1
+
+!! black dark/light
+xterm*color0:                #073642
+xterm*color8:                #002b36
+
+!! red dark/light
+xterm*color1:                #dc322f
+xterm*color9:                #cb4b16
+
+!! green dark/light
+xterm*color2:                #859900
+xterm*color10:               #586e75
+
+!! yellow dark/light
+xterm*color3:                #b58900
+xterm*color11:               #657b83
+
+!! blue dark/light
+xterm*color4:                #268bd2
+xterm*color12:               #839496
+
+!! magenta dark/light
+xterm*color5:                #d33682
+xterm*color13:               #6c71c4
+
+!! cyan dark/light
+xterm*color6:                #2aa198
+xterm*color14:               #93a1a1
+
+!! white dark/light
+xterm*color7:                #eee8d5
+xterm*color15:               #fdf6e3
 
 ! right hand side scrollbar...
 xterm*rightScrollBar: true
