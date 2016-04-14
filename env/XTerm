@@ -1,5 +1,5 @@
 ! Use a nice truetype font and size by default ...
-xterm*faceName:DejaVu:style=Book:pixelsize=14:antialias=false
+xterm*faceName:DejaVu:style=Book:pixelsize=15:antialias=false
 xterm*font: 7x13
 XTerm*locale: true
 XTerm*UTF-8: 1
