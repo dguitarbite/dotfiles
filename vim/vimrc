@@ -155,6 +155,9 @@
         set incsearch
         set showmatch
 
+    " Buffers and splits ...
+        set diffopt+=vertical
+
     " Disable arrow keys!
         nnoremap <up> <nop>
         nnoremap <down> <nop>
@@ -352,6 +355,12 @@
 
         " Better autocompletion for python
             let g:pymode_rope = 0
+
+    " RST stuff
+    "
+    "   " InstantRst should provide a realtime update on the webend.
+    "
+    "   "
 
     " C, C++
         " Enable cmake, doxygen in c.vim

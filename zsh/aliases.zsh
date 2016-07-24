@@ -33,3 +33,5 @@ alias ropenstack-manuals=$HOME/Repositories/Rev/OpenStack/Documentation/openstac
 alias dopenstack-manuals=$HOME/Repositories/Dev/OpenStack/Documentation/openstack-manuals
 alias dnova=$HOME/Repositories/Dev/OpenStack/Compute/nova
 alias rnova=$HOME/Repositories/Rev/OpenStack/Compute/nova
+
+alias emailprototype=$HOME/repos/mailclient/moonshots/emailprototype
