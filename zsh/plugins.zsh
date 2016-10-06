@@ -1,42 +1,65 @@
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen theme XsErG/zsh-themes themes/lazyuser
-
 antigen use oh-my-zsh
 
-antigen bundle <<EOBUNDLE
+antigen bundles <<EOBUNDLE
 
+# Source Control
 git
-pip
-pep8
-lein
-suse
-sudo
-pyenv
-heroku
-python
-pylint
-autoenv
-history
-colorize
-git-glow
+git-flow
+git-fast
 gitignore
-gpg-agent
-ssh-agent
-archlinux
-gnu-utils
 git-extras
 git-prompt
+github/hub
 git-remote-branch
-command-not-found
-Tarrasch/zsh-autoenv
-zsh-users/history-substring-search
-zsh-users/zsh-syntax-highlighting
 
+# Python
+pip
+pep8
+pyenv
+python
+pylint
+
+# Operating System
+yum
+osx
+brew
+suse
+debian
+fedora
+brew-cask
+archlinux
+
+# Auth
+gpg-agent
+ssh-agent
+
+# Misc
+docker
+
+# GNU - Terminal
+tumx
+sudo
+rsync
+iwhois
+screen
+vi-mode
+history
+colorize
+gnu-utils
+command-not-found
+colored-man-pages
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+
+# Zsh theme, order dependent.
+mafredri/zsh-async
+sindresorhus/pure
 
 EOBUNDLE
 
-antigen theme XsErG/zsh-themes themes/lazyuser
-# Keep at end, tell antigen that you are done.
 antigen apply
+
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 
 setopt nocorrectall

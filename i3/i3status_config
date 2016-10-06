@@ -14,7 +14,7 @@ general {
 order += "disk /"
 order += "disk /home"
 order += "run_watch DHCP"
-order += "ethernet enp0s25"
+order += "ethernet eth0"
 # order += "wireless wlan0"
 order += "cpu_temperature 0"
 order += "volume master"
@@ -54,5 +54,3 @@ disk "/" {
 disk "/home" {
         format = "Home %free/%total"
 }
-
-

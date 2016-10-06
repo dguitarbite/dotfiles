@@ -5,7 +5,7 @@
 set $mod Mod4
 
 # Font for window titles.
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 15
 for_window [class="Plugin-container" instance="plugin-container"] floating enable; border none; focus mode_toggle
 
 
@@ -19,8 +19,11 @@ bindsym $mod+Return exec gnome-terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+x kill
 
+# Desktop Wallpaper.
+#exec feh --bg-scale /home/pranav/Downloads/forest-3840x2160-green-fog-threes-8160.jpg
+
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -q -fn Monospace-18:normal
 
 # Start Polkit for authentication
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -201,7 +204,6 @@ client.unfocused        #333333 #222222 #888888 #292d2e
 client.urgent           #2f343a #900000 #ffffff #900000
 
 # running programs
-exec xrandr --output DP-1 --primary --output DP-2 --auto --rotate normal --left-of DP-1
+exec $HOME/.detectdisplays
 exec setxkbmap -option caps:escape
-exec feh --bg-scale ~//
 exec xset m 4/2 0

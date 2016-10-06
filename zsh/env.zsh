@@ -3,10 +3,7 @@ unset GPG_AGENT_INFO
 unset SSH_ASKPASS
 
 # Editor
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='nano'
-fi
+export EDITOR='vim'
+export VISUAL='vi'
 
-#source #{HOME}/deep_learning/distro/install/bin/torch-activate
+export GOPATH=$HOME/.gopath/

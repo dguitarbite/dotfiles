@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
+#!//bin/bash
 
 export base_dir="${PWD}"
 export target="${HOME}"
-
 
 function linkit {
 
@@ -72,10 +71,14 @@ function configure_python {
 
 function configure_env {
 
-    cp -arf ${base_dir}/env/oscrc ${HOME}/.oscrc
+    env_dir=${base_dir}/env
+    #cp -arf ${env_dir}/oscrc ${HOME}/.oscrc
+    linkit ${env_dir}/xinitrc ${HOME}/.xinitrc
+    linkit ${env_dir}/detectdisplays.sh ${HOME}/.detectdisplays
+    linkit ${env_dir}/tmux.conf ${HOME}/.tmux.conf
 }
 
-configure_vim
+#configure_vim
 #configure_i3
 #configure_zsh
 #configure_git

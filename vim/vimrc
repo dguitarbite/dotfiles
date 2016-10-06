@@ -20,8 +20,10 @@
             Plugin 'gmarik/Vundle.vim'
             Plugin 'vim-airline/vim-airline'
             Plugin 'Valloric/YouCompleteMe'
+            Plugin 'christoomey/vim-tmux-navigator'
 
             " To be reviewed.
+            "Plugin 'cscope'
             Plugin 'tpope/vim-fugitive'
             Plugin 'xolox/vim-easytags'
             Plugin 'jmcantrell/vim-virtualenv'
