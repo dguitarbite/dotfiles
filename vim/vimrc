@@ -79,6 +79,7 @@
             " Plugin 'eraserhd/vim-ios.git' " Enable me on OSx
             Plugin 'cocoa.vim'
             Plugin 'mipmip/vim-minimap'
+            Plugin 'Yggdroot/indentLine'
         call vundle#end()            " End Vundle Plugin Configuration
 
     " Post-Configuration
