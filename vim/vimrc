@@ -162,17 +162,17 @@
         set diffopt+=vertical
 
     " Disable arrow keys!
-        nnoremap <up> <nop>
-        nnoremap <down> <nop>
-        nnoremap <left> <nop>
-        nnoremap <right> <nop>
-        inoremap <up> <nop>
-        inoremap <down> <nop>
-        inoremap <left> <nop>
-        inoremap <right> <nop>
-        nnoremap j gj
-        nnoremap k gk
-
+    "    nnoremap <up> <nop>
+     "   nnoremap <down> <nop>
+     "   nnoremap <left> <nop>
+     "   nnoremap <right> <nop>
+     "   inoremap <up> <nop>
+     "   inoremap <down> <nop>
+     "   inoremap <left> <nop>
+     "   inoremap <right> <nop>
+     "   nnoremap j gj
+      "  nnoremap k gk
+      "
     " Settings for ctrlp
         let g:ctrlp_max_height = 30
         set wildignore+=*.pyc
@@ -214,10 +214,10 @@
             let mapleader=','
 
         " Easy movement
-            map <C-J> <C-W>j<C-W>_
-            map <C-K> <C-W>k<C-W>_
-            map <C-L> <C-W>l<C-W>_
-            map <C-H> <C-W>h<C-W>_
+        "    map <C-J> <C-W>j<C-W>_
+        "    map <C-K> <C-W>k<C-W>_
+        "    map <C-L> <C-W>l<C-W>_
+        "    map <C-H> <C-W>h<C-W>_
 
         " Split Windows
             noremap <leader>b <C-w>v<CR>
