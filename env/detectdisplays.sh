@@ -9,7 +9,7 @@
 # Setup multiple displays.
 XRANDR="xrandr"
 DPI=96  # Standard Default for HD 1080p
-CMD="${XRANDR} --dpi ${DPI}"
+CMD="${XRANDR}"
 PADDING=1
 declare -A VOUTS
 eval VOUTS=$(${XRANDR}|awk 'BEGIN {printf("(")} /^\S.*connected/{printf("[%s]=%s ", $1, $2)} END{printf(")")}')
@@ -95,6 +95,5 @@ done
 
 # Setup background using Feh
 feh --randomize --bg-fill \
-	/data/misc/wallpapers/* \
-	/data/misc/wallpapers/* \
-	/data/misc/wallpapers/*
+    $HOME/Pictures/* \
+    $HOME/Pictures/*

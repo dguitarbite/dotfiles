@@ -6,7 +6,7 @@ unset SSH_ASKPASS
 export EDITOR='vim'
 export VISUAL='vi'
 
-Export GOPATH=$HOME/.gopath/
+export GOPATH=$HOME/.gopath/
 
 os_name=`uname`
 
