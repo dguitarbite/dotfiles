@@ -25,6 +25,7 @@
             Plugin 'vim-airline/vim-airline'
             Plugin 'Valloric/YouCompleteMe'
             Plugin 'christoomey/vim-tmux-navigator'
+            Plugin 'vim-syntastic/syntastic'
 
             " To be reviewed.
             "Plugin 'cscope'
@@ -32,24 +33,17 @@
             Plugin 'xolox/vim-easytags'
             Plugin 'jmcantrell/vim-virtualenv'
             Plugin 'chrisbra/NrrwRgn'
-            Plugin 'scrooloose/syntastic'
             Plugin 'tomtom/tlib_vim'
             Plugin 'Shougo/neocomplete'
             Plugin 'vim-airline/vim-airline-themes'
             Plugin 'kien/ctrlp.vim'
-            Plugin 'klen/python-mode'
             Plugin 'TimeTap'
             Plugin 'StripWhiteSpaces'
-            Plugin 'pyunit.vim'
             Plugin 'reinh/vim-makegreen'
-            Plugin 'tpope/vim-rails'
-            Plugin 'vim-ruby/vim-ruby'
-            Plugin 'tpope/vim-cucumber'
             Plugin 'closetag.vim'
             Plugin 'Gundo'
             Plugin 'tagbar'
             Plugin 'scratch'
-            Plugin 'vim-flake8'
             Plugin 'vim-misc'
             Plugin 'rking/ag.vim'
             Plugin 'mileszs/ack.vim'
@@ -66,23 +60,14 @@
             Plugin 'terryma/vim-multiple-cursors'
             Plugin 'altercation/vim-colors-solarized'
             Plugin 'Rykka/riv.vim'
-            Plugin 'c.vim'
-            Plugin 'awk-support.vim'
             Plugin 'bash-support.vim'
             Plugin 'LucHermitte/lh-cpp'
             Plugin 'fholgado/minibufexpl.vim'
-            Plugin 'fs111/pydoc.vim'
             Plugin 'airblade/vim-gitgutter.git'
             Plugin 'vim-scripts/TaskList.vim'
             Plugin 'MarcWeber/vim-addon-mw-utils'
-            Plugin 'vadv/vim-chef'
             Plugin 'restore_view.vim'
             Plugin 'autofold.vim'
-            Plugin 'toyamarinyon/vim-swift'
-            Plugin 'keith/swift.vim'
-            " Plugin 'eraserhd/vim-ios.git' " Enable me on OSx
-            Plugin 'cocoa.vim'
-            Plugin 'mipmip/vim-minimap'
             Plugin 'Yggdroot/indentLine'
         call vundle#end()            " End Vundle Plugin Configuration
 
@@ -92,13 +77,11 @@
 
 " General Configuration
 
-    " Background
-    set background=dark
-
     " Color Scheme!
         syntax enable
 	    try
             colorscheme solarized
+            set background=dark
         catch
             colorscheme default
         endtry
@@ -166,17 +149,17 @@
         set diffopt+=vertical
 
     " Disable arrow keys!
-    "    nnoremap <up> <nop>
-     "   nnoremap <down> <nop>
-     "   nnoremap <left> <nop>
-     "   nnoremap <right> <nop>
-     "   inoremap <up> <nop>
-     "   inoremap <down> <nop>
-     "   inoremap <left> <nop>
-     "   inoremap <right> <nop>
-     "   nnoremap j gj
-      "  nnoremap k gk
-      "
+        nnoremap <up> <nop>
+        nnoremap <down> <nop>
+        nnoremap <left> <nop>
+        nnoremap <right> <nop>
+        inoremap <up> <nop>
+        inoremap <down> <nop>
+        inoremap <left> <nop>
+        inoremap <right> <nop>
+        nnoremap j gj
+        nnoremap k gk
+
     " Settings for ctrlp
         let g:ctrlp_max_height = 30
         set wildignore+=*.pyc
@@ -188,6 +171,7 @@
         set mousehide   " Hide the mouse cursor while typing
 
     " Status Line
+        " Left alignment
         set statusline+=%n:             " - buffer number, followed by a colon
         set statusline+=%<%f            " - relative filename, truncated from the left
         set statusline+=\               " - a space
@@ -198,12 +182,42 @@
         set statusline+=\               " - a space
         set statusline+=%{fugitive#statusline()} " Add Vim Fugutive in the status line
         set statusline+=\               " - a space
+
+        " Right alignment
         set statusline+=%=              " - right-align the rest
+        set statusline+=$#warningmsg#   " Syntastic warning
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
+        set statusline+=\               " - a space
         set statusline+=%-10.(%l,%c%V%) " - line,column[-virtual column]
         set statusline+=\               " - a space
         set statusline+=%4L             " - total number of lines in buffer
         set statusline+=\               " - a space
         set statusline+=%P              " - position in buffer as percentage
+
+    " Syntastic
+
+        " Toggle syntastic checks. Could be really irritating at times.
+		nmap <F7> :SyntasticToggleMode<CR>
+
+        " Programming languages.
+        let g:syntastic_python_checkers = ['pylint', 'pydocstyle']
+        let g:syntastic_sh_checkers = ['bashate', 'checkbashisms', 'sh', 'shellcheck']
+        let g:syntastic_go_checkers = ['gofmt', 'golint', 'gotype', 'govet']
+        let g:syntastic_zsh_checkers = ['zsh']
+
+        " Configuration files.
+        let g:syntastic_haml_checkers = ['haml', 'haml_lint']
+        let g:syntastic_json_checkers = ['jsonlint', 'jsonval']
+        let g:syntastic_markdown_checkers = ['mdl', 'proselint', 'textlint']
+        let g:syntastic_rst_checkers = ['proselint', 'rst2pseudoxml', 'rstcheck', 'sphinx']
+        let g:syntastic_yaml_checkers = ['yamllint', 'yamlxs']
+
+        let g:syntastic_aggregate_errors = 1
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 0
+        let g:syntastic_check_on_wq = 1
 
     " Git gutter
         let g:gitgutter_realtime = 0    " Disable realtime checks to reduce
@@ -216,16 +230,7 @@
     " Remapping/Custom mapping Keys
         " The leader key!
             let mapleader=','
-
-        " Easy movement
-        "    map <C-J> <C-W>j<C-W>_
-        "    map <C-K> <C-W>k<C-W>_
-        "    map <C-L> <C-W>l<C-W>_
-        "    map <C-H> <C-W>h<C-W>_
-
-        " Split Windows
-            noremap <leader>b <C-w>v<CR>
-            noremap <leader>v <C-w>s<CR>
+            set timeoutlen=1500     " Default timeout is too short.
 
         " Gitgutter toggle
             noremap <leader>gg :GitGutterToggle<CR>
@@ -318,62 +323,3 @@
         nnoremap <silent> <leader>gw :Gwrite<CR>
         nnoremap <silent> <leader>ge :Gedit<CR>
         nnoremap <silent> <leader>gi :Git add -p %<CR>
-
-    " Vim Minimap
-        let g:minimap_highlight='Visual'
-        nnoremap <leader>` :Minimap
-        nnoremap <leader>~ :MinimapClose
-
-
-" Add programming language support
-
-    " Python
-        " Python Mode
-            let g:pymode_rope = 1
-
-        " Documentation
-            let g:pymode_doc = 1
-            let g:pymode_doc_key = 1
-
-        " Linting
-            let g:pymode_lint = 1
-            let g:pymode_lint_checker = "pyflakes,pep8"
-            let g:pymode_lint_write = 1 " Auto check on save
-            let g:pyflakes_use_quickfix = 0
-            let g:flake8_show_in_gutter = 1
-            let g:flake8_show_in_file = 1
-            autocmd BufWritePost *.py call Flake8() " Call flake8 on save.
-
-        " Support virtualenv
-            let g:pymode_virtualenv = 1
-
-        " Enable breakpoints plugin
-            let g:pymode_breakpoint = 1
-            let g:pymode_breakpoint_bind = '<leader>b'
-
-        " syntax highlighting
-            let g:pymode_syntax = 1
-            let g:pymode_syntax_all = 1
-            let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-            let g:pymode_syntax_space_errors = g:pymode_syntax_all
-
-        " Don't autofold code
-            let g:pymode_folding = 0
-
-        " Better autocompletion for python
-            let g:pymode_rope = 0
-
-    " RST stuff
-    "
-    "   " InstantRst should provide a realtime update on the webend.
-    "
-    "   "
-
-    " C, C++
-        " Enable cmake, doxygen in c.vim
-            let g:C_UseTool_cmake = 'yes'
-            let g:C_UseTool_doxygen = 'yes'
-
-    " Ruby, Chef, Vim-Chef
-        " Enable syntax for chef files
-        autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
