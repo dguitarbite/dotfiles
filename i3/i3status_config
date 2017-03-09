@@ -11,20 +11,19 @@ general {
         interval = 5
 }
 
-order += "disk /"
 order += "disk /home"
-order += "run_watch DHCP"
-order += "ethernet eth0"
+order += "disk /var"
+order += "ethernet enp5s0"
 # order += "wireless wlan0"
 order += "cpu_temperature 0"
-order += "volume master"
 order += "load"
+order += "volume master"
 order += "tztime local"
 
-ethernet eth0 {
+ethernet enp5s0 {
         # if you use %speed, i3status requires root privileges
-        format_up = "E: %ip (%speed)"
-        format_down = "E: down"
+        format_up = "E: Up"
+        format_down = "E: Down"
 }
 
 cpu_temperature 0 {
@@ -47,10 +46,10 @@ load {
         format = "Load %1min"
 }
 
-disk "/" {
-        format = "Root %free/%total"
+disk "/home" {
+        format = "H: %free"
 }
 
-disk "/home" {
-        format = "Home %free/%total"
+disk "/var" {
+        format = "V: %free"
 }

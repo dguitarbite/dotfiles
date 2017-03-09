@@ -21,14 +21,20 @@
         call vundle#begin()         " Start Vundle Plugin Configuration
 
             " Reviewed
-            Plugin 'gmarik/Vundle.vim'
+            Plugin 'VundleVim/Vundle.vim'
             Plugin 'vim-airline/vim-airline'
             Plugin 'Valloric/YouCompleteMe'
             Plugin 'christoomey/vim-tmux-navigator'
             Plugin 'vim-syntastic/syntastic'
 
+            " For Salt, partially reviewed
+            Plugin 'saltstack/salt-vim'
+            Plugin 'stephpy/vim-yaml'
+            Plugin 'jinja'
+
             " To be reviewed.
             "Plugin 'cscope'
+            Plugin 'kien/tabman.vim'
             Plugin 'tpope/vim-fugitive'
             Plugin 'xolox/vim-easytags'
             Plugin 'jmcantrell/vim-virtualenv'
@@ -97,7 +103,7 @@
         nmap <F8> :TagbarToggle<CR>
 
     " Task Lists
-        nmap <F9> :TaskList<CR>
+        nmap <F10> :TaskList<CR>
 
     " Misc
         set timeoutlen=50
@@ -219,6 +225,10 @@
         let g:syntastic_check_on_open = 0
         let g:syntastic_check_on_wq = 1
 
+    " Saltstack
+
+        let g:sls_use_jinja_syntax = 1
+
     " Git gutter
         let g:gitgutter_realtime = 0    " Disable realtime checks to reduce
         let g:gitgutter_eager = 0
@@ -294,11 +304,14 @@
 
     " Set number mode keymapbindings
         set number
-        nnoremap <F3> :NumbersToggle<CR>
-        nnoremap <F4> :set nu!<CR>
+        nnoremap <F4> :NumbersToggle<CR>
+        "nnoremap <F4> :set nu!<CR>
 
     " Gundo toggle
         nnoremap <F6> :GundoToggle<CR>
+
+    " Tabman Toggle
+        nnoremap <F3> :TMToggle<CR>
 
     " Ctags
 

@@ -12,7 +12,7 @@ function linkit {
 function configure_vim {
 
     linkit "${base_dir}/vim/vimrc" "${HOME}/.vimrc"
-    git clone git://github.com/gmarik/Vundle.git $target/.vim/bundle/Vundle.vim
+    git clone https://github.com/VundleVim/Vundle.vim.git $target/.vim/bundle/Vundle.vim
 
 
     vim +silent! +BundleInstall! +qall #2&> /dev/null
@@ -72,17 +72,17 @@ function configure_python {
 function configure_env {
 
     env_dir=${base_dir}/env
-    #cp -arf ${env_dir}/oscrc ${HOME}/.oscrc
-    linkit ${env_dir}/xinitrc ${HOME}/.xinitrc
-    linkit ${env_dir}/detectdisplays.sh ${HOME}/.detectdisplays
+    #linkit ${env_dir}/xinitrc ${HOME}/.xinitrc
+    #linkit ${env_dir}/detectdisplays.sh ${HOME}/.detectdisplays
     linkit ${env_dir}/tmux.conf ${HOME}/.tmux.conf
+    linkit ${env_dir}/setwallpaper.sh ${HOME}/.setwallpaper
 }
 
-#configure_vim
-#configure_i3
-#configure_zsh
-#configure_git
+configure_vim
+configure_i3
+configure_zsh
+configure_git
 #configure_irc
-#configure_env
+configure_env
 #configure_repos
 #configure_python

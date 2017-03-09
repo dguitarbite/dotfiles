@@ -5,9 +5,12 @@
 set $mod Mod4
 
 # Font for window titles.
-font pango:DejaVu Sans Mono 15
+font pango:DejaVu Sans Mono 10
 for_window [class="Plugin-container" instance="plugin-container"] floating enable; border none; focus mode_toggle
 
+# Focus follows mouse
+focus_follows_mouse yes # yes|no
+mouse_warping none # Mouse follows focus output|none
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -19,20 +22,8 @@ bindsym $mod+Return exec gnome-terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+x kill
 
-# Desktop Wallpaper.
-#exec feh --bg-scale /home/pranav/Downloads/forest-3840x2160-green-fog-threes-8160.jpg
-
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -q -fn Monospace-18:normal
-
-# Start Polkit for authentication
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-# Network Manager Applet --
-exec --no-startup-id nm-applet
-
-# Unlock SSH key.
-exec --no-startup-id ssh-add
+bindsym $mod+d exec dmenu_run -i
 
 # Take a screenshot upon pressing Print Screen (select an area)
 bindsym --release Print exec --no-startup-id import /tmp/latest-screenshot.png
@@ -96,42 +87,64 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# default layout
-workspace_layout tabbed
-
 # new window border width
 new_window pixel 1
 new_float pixel 1
 
+# TODO(dbite): Setup the ws stuff.
+# Name the workspaces
+set $ws1 "1: www"
+set $ws2 "2: ws"
+set $ws3 "3: ws"
+set $ws4 "4: ws"
+set $ws5 "5: ws"
+# SSH CONNECTIONS ...
+set $ws6 "6: ws"
+# IRC + MAIL + STUFF LIKE THAT.
+set $ws7 "7: ws"
+set $ws8 "8: mon"
+set $ws9 "9: virt"
+# Teamviewer, RDP, X11 etc.
+set $ws0 "10: conns"
+
+# Workspace defaults
+# default layout
+workspace_layout tabbed
+workspace $ws1 output DVI-D-0
+workspace $ws2 output DVI-D-0
+workspace $ws3 output DVI-D-0
+workspace $ws8 output DP-5
+workspace $ws9 output DP-5
+workspace $ws0 output DP-5
+
 # switch to workspace
-bindsym $mod+1 workspace 1:web
-bindsym $mod+2 workspace 2:ws1
-bindsym $mod+3 workspace 3:ws2
-bindsym $mod+4 workspace 4:ws3
-bindsym $mod+5 workspace 5:ws4
-bindsym $mod+6 workspace 6:ws5
-bindsym $mod+7 workspace 7:virt
-bindsym $mod+8 workspace 8:rev
-bindsym $mod+9 workspace 9:mail
-bindsym $mod+0 workspace 10:music
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1:web
-bindsym $mod+Shift+2 move container to workspace 2:ws1
-bindsym $mod+Shift+3 move container to workspace 3:ws2
-bindsym $mod+Shift+4 move container to workspace 4:ws3
-bindsym $mod+Shift+5 move container to workspace 5:ws4
-bindsym $mod+Shift+6 move container to workspace 6:ws5
-bindsym $mod+Shift+7 move container to workspace 7:virt
-bindsym $mod+Shift+8 move container to workspace 8:rev
-bindsym $mod+Shift+9 move container to workspace 9:mail
-bindsym $mod+Shift+0 move container to workspace 10:music
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
 
-# custom clients on workspaces
-assign [class="firefox"] 1:web
-assign [class="virt-manager"] 7:virt
-assign [class="hexchat"] 9:mail
-assign [class="thunderbird"] 9:mail
+# custom clients on workspaces TODO(dbite): Figure this shit out.
+assign [class="google-chrome"] workspace $ws1
+assign [class="virt-manager"] workspace $ws9
+assign [class="teamviewer"] → workspace $ws0
 
 # auto jump back
 workspace_auto_back_and_forth yes
@@ -152,7 +165,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # lock the screen
-bindsym Control+Mod1+l exec notify-send "DUNST_COMMAND_PAUSE" && i3lock -c 000000 --nofork && notify-send "DUNST_COMMAND_RESUME"
+bindsym Control+Mod1+l exec notify-send "DUNST_COMMAND_PAUSE" && i3lock -B 5 -k -e -f --nofork && notify-send "DUNST_COMMAND_RESUME"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -203,7 +216,23 @@ client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused        #333333 #222222 #888888 #292d2e
 client.urgent           #2f343a #900000 #ffffff #900000
 
-# running programs
-exec $HOME/.detectdisplays
+### Startup scripts.
+# Start Polkit for authentication
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Network Manager Applet --
+exec --no-startup-id nm-applet
+
+# Unlock SSH key.
+exec --no-startup-id ssh-add
+
+# Launch applications on startup
+exec google-chrome-stable
+# TODO(dbite): Configure start applications, layout. Ex:- tmux (with specific conf. like IRC, mail etc.)
+#
+# Running programs on startup
 exec setxkbmap -option caps:escape
 exec xset m 4/2 0
+
+# Desktop Wallpaper.
+exec ./$HOME/.setwallpaper
