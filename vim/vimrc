@@ -10,12 +10,22 @@
         set nocompatible              " Switch off vi backwards compatability
         filetype off                  " I wanna use Vundle
 
-    " set the runtime path to include Vundle and initialize
-        if has('unix')
-            set rtp+=$HOME/.vim/bundle/Vundle.vim
-        elseif has('win32')
-            set rtp+=$VIMRUNTIME/.vim/bundle/Vundle.vim
+    " Vundle auto-install logic.
+
+        let install_vundle=1
+        let vundle_readme=expand("$HOME/.vim/bundle/Vundle.vim/README.md")
+
+        " Check if vundle is installed.
+        if !filereadable(vundle_readme)
+            echo "Installing Vundle ..."
+            echo ""
+            silent !git clone https://github.com/VundleVim/Vundle.vim $HOME/.vim/bundle/Vundle.vim
+            let install_vundle=0
         endif
+
+    " }
+
+        set rtp+=$HOME/.vim/bundle/Vundle.vim
 
     " Install Vim Plugins
         call vundle#begin()         " Start Vundle Plugin Configuration
@@ -31,6 +41,10 @@
             Plugin 'saltstack/salt-vim'
             Plugin 'stephpy/vim-yaml'
             Plugin 'jinja'
+
+            " Review high priority
+            "Plugin 'tpope/vim-dispatch'
+            "Plugin 'jgdavey/tslime.vim'
 
             " To be reviewed.
             "Plugin 'cscope'
@@ -75,7 +89,17 @@
             Plugin 'restore_view.vim'
             Plugin 'autofold.vim'
             Plugin 'Yggdroot/indentLine'
-        call vundle#end()            " End Vundle Plugin Configuration
+
+            " Install Vundle plugins if this is the first time.
+            if install_vundle ==0
+                echo "Installing Vundle, hold tight!"
+                echo ""
+                :PluginInstall
+            endif
+
+        call vundle#end()
+
+    " End Vundle Section Logic.
 
     " Post-Configuration
         filetype on

@@ -1,7 +1,6 @@
 [user]
 	email = dguitarbite@gmail.com
 	name = Pranav Salunke
-
 [alias]
     # Git Log
     l = log --topo-order --pretty=format:'%C(yellow)%h %C(cyan)%cn %C(blue)%cr%C(reset) %s'
@@ -14,7 +13,7 @@
     llf = fsck --lost-found
     lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-
+	serve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
 [color]
     branch = always
     diff = always
@@ -24,46 +23,38 @@
     showbranch = auto
     status = auto
     ui = always
-
 [color "interactive"]
     error = red bold
-
 [color "branch"]
     current = yellow reverse
     local = yellow
     remote = green
-
 [color "diff"]
     meta = yellow
     frag = magenta
     old = red
     new = green
     whitespace = white reverse
-
 [color "status"]
     added = yellow
     changed = green
     untracked = cyan
     branch = magenta
-
 [core]
     editor = vim
     excludefile = ${HOME}/.gitignoreglobal
-
 [credential]
 	helper = cache --timeout=3600
-
 [gitreview]
 	username = dguitarbite
-
-[push]
-	default = matching
-
 [diff]
     tool = vimdiff
-
 [merge]
     tool = vimdiff
-
 [push]
     default = simple
+[log]
+	decorate = full
+[branch]
+	rebase = true
+	autosetuprebase = always

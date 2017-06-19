@@ -9,6 +9,12 @@ function linkit {
     ln -s $1 $2
 }
 
+function detect_environment {
+
+    # Function to detect the environment.
+    echo "Not yet implemented."
+}
+
 function configure_vim {
 
     linkit "${base_dir}/vim/vimrc" "${HOME}/.vimrc"
@@ -78,6 +84,7 @@ function configure_env {
     linkit ${env_dir}/setwallpaper.sh ${HOME}/.setwallpaper
 }
 
+detect_environment
 configure_vim
 configure_i3
 configure_zsh
